@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CivicPulse | Public Sentiment Analytics</title>
+  <meta name="description" content="CivicPulse – A platform to analyze public Facebook sentiment and engagement using AI and data visualization." />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #f8fafc;
+      color: #0f172a;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+    }
+    header {
+      background-color: #0f172a;
+      color: white;
+      padding: 50px 20px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.4rem;
+    }
+    header p {
+      margin-top: 10px;
+      font-size: 1.1rem;
+      color: #cbd5e1;
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      background: white;
+      padding: 40px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+    h2 {
+      color: #334155;
+    }
+    .btn {
+      display: inline-block;
+      margin-top: 15px;
+      padding: 10px 20px;
+      background-color: #2563eb;
+      color: white;
+      text-decoration: none;
+      border-radius: 6px;
+      transition: 0.2s ease;
+    }
+    .btn:hover {
+      background-color: #1e40af;
+    }
+    footer {
+      text-align: center;
+      margin: 50px 0 20px;
+      color: #64748b;
+      font-size: 14px;
+    }
+    .links {
+      margin-top: 25px;
+    }
+    .links a {
+      margin-right: 20px;
+      color: #2563eb;
+      text-decoration: none;
+    }
+    .links a:hover {
+      text-decoration: underline;
+    }
+    .chart-container {
+      margin-top: 30px;
+    }
+    .post-samples {
+      margin-top: 30px;
+    }
+    .post {
+      background-color: #f1f5f9;
+      padding: 15px;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .positive { border-left: 6px solid #16a34a; }
+    .negative { border-left: 6px solid #dc2626; }
+    .neutral { border-left: 6px solid #facc15; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>🌐 CivicPulse</h1>
+    <p>Analyzing Public Sentiment from Facebook Pages using AI</p>
+  </header>
+
+  <main>
+    <h2>What is CivicPulse?</h2>
+    <p>
+      <strong>CivicPulse</strong> is a data analytics platform designed to measure public and political sentiment from 
+      publicly available Facebook Page posts, comments, and reactions. 
+      Using AI-powered sentiment analysis, it visualizes how citizens engage with civic discussions online.
+    </p>
+
+    <h2>How It Works</h2>
+    <ol>
+      <li>Connects to public Facebook Pages (e.g., political leaders, news outlets)</li>
+      <li>Fetches posts, comments, and reactions using Facebook Graph API</li>
+      <li>Analyzes tone and engagement level (positive, negative, neutral)</li>
+      <li>Displays results through a clean and interactive dashboard</li>
+    </ol>
+
+    <h2>Demo Sentiment Overview</h2>
+    <canvas id="sentimentChart" width="400" height="200"></canvas>
+
+    <div class="post-samples">
+      <h2>Sample Posts Analyzed</h2>
+      <div class="post positive">
+        <strong>Post:</strong> “The new education policy will benefit millions of students.”<br>
+        <strong>Sentiment:</strong> Positive 😊
+      </div>
+      <div class="post negative">
+        <strong>Post:</strong> “People are frustrated with traffic and corruption issues.”<br>
+        <strong>Sentiment:</strong> Negative 😠
+      </div>
+      <div class="post neutral">
+        <strong>Post:</strong> “The election date has been officially announced.”<br>
+        <strong>Sentiment:</strong> Neutral 😐
+      </div>
+    </div>
+
+    <div class="chart-container">
+      <h2>Engagement Summary (Demo)</h2>
+      <canvas id="engagementChart" width="400" height="200"></canvas>
+    </div>
+
+    <h2>Development Status</h2>
+    <p>
+      CivicPulse is currently under development. Facebook App Review is in progress for API access permissions.
+      Once approved, this platform will display real-time sentiment analytics based on public social data.
+    </p>
+
+    <div class="links">
+      <a href="https://shahindiu16.github.io/civicpulse-privacy/" target="_blank">Privacy Policy</a>
+      <a href="https://shahindiu16.github.io/civicpulse-privacy/terms.html" target="_blank">Terms of Service</a>
+      <a href="https://shahindiu16.github.io/civicpulse-privacy/data-deletion.html" target="_blank">Data Deletion</a>
+    </div>
+
+    <a href="#" class="btn">Learn More (Coming Soon)</a>
+  </main>
+
+  <footer>
+    © 2025 CivicPulse. All rights reserved.  
+  </footer>
+
+  <script>
+    // Demo Sentiment Pie Chart
+    const ctx1 = document.getElementById('sentimentChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'pie',
+      data: {
+        labels: ['Positive', 'Negative', 'Neutral'],
+        datasets: [{
+          data: [58, 27, 15],
+          backgroundColor: ['#16a34a', '#dc2626', '#facc15'],
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { position: 'bottom' },
+          title: { display: true, text: 'Public Sentiment Distribution (Demo)' }
+        }
+      }
+    });
+
+    // Demo Engagement Bar Chart
+    const ctx2 = document.getElementById('engagementChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Likes', 'Comments', 'Shares'],
+        datasets: [{
+          label: 'Engagement Count',
+          data: [1200, 340, 180],
+          backgroundColor: '#2563eb'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: { display: false },
+          title: { display: true, text: 'Average Engagement (Demo)' }
+        },
+        scales: {
+          y: { beginAtZero: true }
+        }
+      }
+    });
+  </script>
+</body>
+</html>
